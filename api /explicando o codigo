@@ -1,0 +1,32 @@
+Este código é um exemplo básico de uma aplicação web usando o framework Flask em Python. Vou explicar cada parte de forma simples:
+
+Importações:
+
+from flask import Flask, jsonify, request: Importa as classes necessárias do Flask para criar a aplicação, manipular 
+respostas JSON e obter dados da requisição.
+Criação da Aplicação:
+
+app = Flask(__name__): Cria uma instância da aplicação Flask.
+Dados Simulados:
+
+postagens: É uma lista de dicionários que representa postagens simuladas, agindo como um banco de dados.
+Rotas:
+
+@app.route('/'): Define a rota padrão para obter todas as postagens.
+@app.route('/postagem/<int:indice>',methods=['GET']): Define uma rota para obter uma postagem por seu índice na lista.
+@app.route('/postagem', methods=['POST']): Define uma rota para criar uma nova postagem.
+@app.route('/postagem/<int:indice>',methods=['PUT']): Define uma rota para alterar uma postagem existente.
+@app.route('/postagem/<int:indice>',methods=['DELETE']): Define uma rota para excluir uma postagem existente.
+Funções de Manipulação de Rotas:
+
+obter_postagens(): Retorna todas as postagens como JSON.
+obter_postagem_por_indice(indice): Retorna uma postagem específica pelo índice como JSON.
+nova_postagem(): Cria uma nova postagem a partir dos dados JSON fornecidos na requisição.
+alterar_postagem(indice): Altera uma postagem existente com base nos dados JSON fornecidos na requisição.
+excluir_postagem(indice): Exclui uma postagem existente com base no índice fornecido.
+Execução da Aplicação:
+
+app.run(port=5000, host='localhost', debug=True): Inicia a aplicação Flask no host 'localhost' e na porta 5000, com modo 
+de depuração ativado.
+Em resumo, este código implementa uma API básica para manipulação de postagens, permitindo a obtenção, criação, 
+atualização e exclusão de postagens simuladas em formato JSON.
