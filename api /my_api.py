@@ -28,6 +28,28 @@ def nova_postagem():
     postagens.append(postagem)
     return jsonify(postagem,200)
 
+#alterar a postagem existente-PUT http://localhost:5000/postagem/1
+@app.route('/postagem/<int:indice>',methods=['PUT'])
+def alterar_postagem(indice):
+    postagem_alterada = request.get_json()
+    postagens[indice].update(postagem_alterada)
+    return jsonify(postagens[indice],200)
+
+
+#excluir uma postagem  - DELETE - http://localhost:5000/postagem/1
+@app.route('/postagem/<int:indice>',methods=['DELETE'])
+def excluir_postagem(indice):
+    try:
+        if postagens[indice] is not None:
+           del postagens[indice]
+           return jsonify(f'Foi excluido a postagem {postagens[indice]}',200)
+    except:
+        return jsonify('Nao foi possivel encontrar a postagem para exclusao',404)
+
+
+
+
+
 
 # Executa a aplicação Flask no host 'localhost' e porta 5000
 if __name__ == '__main__':
