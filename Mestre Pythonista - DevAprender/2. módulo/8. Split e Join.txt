@@ -1,4 +1,0 @@
-DESAFIO
-
-frase1 = "Desafio manipulação de strings"
-frase2 = "jhonatan,rafael,carol,camilla"

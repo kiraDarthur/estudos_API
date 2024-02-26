@@ -1,2 +1,0 @@
-biblioteca = "Biblioteca"
-frase = "Desenvolvimento De Aplicações"

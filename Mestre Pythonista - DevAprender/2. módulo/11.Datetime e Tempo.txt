@@ -1,2 +1,0 @@
-# DESAFIO
-# Calcule quantos dias faltam até o seu aniversário
