@@ -1,0 +1,43 @@
+Vou explicar com mais detalhes.
+
+Em Python, você pode definir funções que recebem outras funções como argumentos e retornam funções. Isso é fundamental
+para entender os decoradores.
+
+Vamos ver um exemplo mais detalhado:
+
+Suponha que você tenha a seguinte função:
+
+```python
+def saudacao(nome):
+    return f"Olá, {nome}!"
+```
+
+Agora, você quer criar um decorador que modifica o comportamento dessa função para que ela imprima a saudação em letras
+maiúsculas. Você poderia fazer isso usando um decorador da seguinte maneira:
+
+```python
+def maiusculas_decorator(funcao):
+    def wrapper(nome):
+        resultado = funcao(nome)
+        return resultado.upper()
+    return wrapper
+
+@maiusculas_decorator
+def saudacao(nome):
+    return f"Olá, {nome}!"
+```
+
+Neste exemplo:
+
+- `maiusculas_decorator` é uma função decoradora que recebe outra função, `saudacao`, como argumento.
+- Dentro de `maiusculas_decorator`, definimos uma função interna chamada `wrapper`, que recebe o mesmo argumento que
+`saudacao` (neste caso, `nome`).
+- `wrapper` chama a função original (`saudacao`) e armazena o resultado.
+- Em seguida, `wrapper` retorna o resultado em maiúsculas.
+
+Quando você usa `@maiusculas_decorator` acima da definição da função `saudacao`, você está essencialmente dizendo ao
+Python para passar a função `saudacao` como argumento para o decorador `maiusculas_decorator`. Em outras palavras, você
+está dizendo que a função `saudacao` será "decorada" pela função `maiusculas_decorator`.
+
+Assim, sempre que você chamar `saudacao`, ela passará pelo decorador `maiusculas_decorator`, que modificará seu
+comportamento de acordo com a lógica definida dentro de `wrapper`.
