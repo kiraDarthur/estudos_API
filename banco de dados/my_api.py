@@ -56,13 +56,35 @@ def abter_autores():
 
 @app.route('/autores/<int:id_autor>',methods=['GET'])
 def obter_autor_por_id(id_autor):
-    pass
+    autor = Autor.query.filter_by(id_autor=id_autor).first()
+    if not autor:
+        return jsonify(f'Autor nao encontrado')
+    autor_atual = {}
+    autor_atual['id_autor'] = autor.id_autor
+    autor_atual['nome'] = autor.nome
+    autor_atual['email'] = autor.email
+
+    return jsonify(f'Voce buscou pelo autor:{autor_atual}')
+
+
 @app.route('/autores',methods=['POST'])
 def novo_autor():
-    pass
+    novo_autor = request.get_json()
+    autor = Autor(
+        nome=novo_autor['nome'], senha=novo_autor['senha'], email=novo_autor['email'])
+
+    db.session.add(autor)
+    db.session.commit()
+
+    return jsonify({'mensagem':'Usuario criado com sucesso'},200)
+
+
 @app.route('/autores/<int:id_autor>',methods=['PUT'])
 def alterar_autor(id_autor):
-    pass
+
+
+
+
 
 @app.route('/autores/<int:id_autor>',methods=['DELETE'])
 def excluir_autor(id_autor):
