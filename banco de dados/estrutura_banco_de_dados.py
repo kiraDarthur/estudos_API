@@ -27,7 +27,8 @@ class Postagem(db.Model):
     conteudo = db.Column(db.Text, nullable=False)
     id_autor = db.Column(db.Integer, db.ForeignKey('autor.id_autor'), nullable=False)
 
-if __name__ == '__main__':
+
+def inicializar_banco():
     # Executar o comando para criar o banco de dados dentro do contexto da aplicação Flask
     with app.app_context():
         # Criar o banco de dados
@@ -37,3 +38,6 @@ if __name__ == '__main__':
         autor = Autor(nome='Jhonatan', email='jhonatan@email.com', senha='123456', admin=True)
         db.session.add(autor)
         db.session.commit()
+
+if __name__ == '__main__':
+    inicializar_banco()

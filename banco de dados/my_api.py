@@ -1,14 +1,6 @@
 from flask import Flask, jsonify, request
+from estrutura_banco_de_dados import Autor,Postagem,app,db
 
-# Cria uma instância da aplicação Flask/ com nome da porta atual
-app = Flask(__name__)
-
-# Lista de dicionários representando postagens /simulando um banco de dados
-postagens = [
-    {'titulo': 'Minha historia', 'autor': 'Amanda Dias'},
-    {'titulo': 'Novo Dispositivo', 'autor': 'Howard Stringer'},
-    {'titulo': 'Lançamento do ano', 'autor': 'Eliane Vieira'}
-]
 
 # Definição da rota padrão ('/') para obter postagens
 @app.route('/')
@@ -47,6 +39,34 @@ def excluir_postagem(indice):
         return jsonify('Nao foi possivel encontrar a postagem para exclusao',404)
 
 
+
+@app.route('/autores')
+def abter_autores():
+    autores = Autor.query.all()
+    lista_de_autores =[]
+    for autor in autores:
+        autor_atual = {}
+        autor_atual  ['id_autor'] = autor.id_autor
+        autor_atual ['nome'] = autor.nome
+        autor_atual ['email'] = autor.email
+        lista_de_autores.append(autor_atual)
+
+    return jsonify({'autores':lista_de_autores})
+
+
+@app.route('/autores/<int:id_autor>',methods=['GET'])
+def obter_autor_por_id(id_autor):
+    pass
+@app.route('/autores',methods=['POST'])
+def novo_autor():
+    pass
+@app.route('/autores/<int:id_autor>',methods=['PUT'])
+def alterar_autor(id_autor):
+    pass
+
+@app.route('/autores/<int:id_autor>',methods=['DELETE'])
+def excluir_autor(id_autor):
+    pass
 
 
 
