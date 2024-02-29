@@ -81,7 +81,7 @@ def novo_autor():
 
 @app.route('/autores/<int:id_autor>',methods=['PUT'])
 def alterar_autor(id_autor):
-
+    # 13:32 f136
 
 
 
