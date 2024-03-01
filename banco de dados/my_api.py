@@ -81,14 +81,38 @@ def novo_autor():
 
 @app.route('/autores/<int:id_autor>',methods=['PUT'])
 def alterar_autor(id_autor):
-    # 13:32 f136
+    usuario_a_alterar = request.get_json()
+    autor = Autor.query.filter_by(id_autor=id_autor).first()
+    if not autor:
+        return jsonify({'mensagem':'este  usuario nao foi encontrado'})
+    try:
+        if usuario_a_alterar['nome']:
+            autor.nome = usuario_a_alterar['nome']
+    except:
+        pass
 
+    try:
+        if usuario_a_alterar['email']:
+            autor.email = usuario_a_alterar['email']
+    except:
+        pass
+    try:
+        if usuario_a_alterar['senha']:
+            autor.senha = usuario_a_alterar['senha']
+    except:
+        pass
 
-
-
+    db.session.commit()
+    return jsonify({'mensagem':'Usuario alterado com sucesso!'})
 @app.route('/autores/<int:id_autor>',methods=['DELETE'])
 def excluir_autor(id_autor):
-    pass
+    autor_existente = Autor.query.filter_by(id_autor = id_autor).first()
+    if not autor_existente:
+        return jsonify({'mensagem':'este autor nao foi encontrado'})
+    db.session.delete(autor_existente)
+    db.session.commit()
+
+    return jsonify({'mensagem':'Autor excluido com sucesso!'})
 
 
 
